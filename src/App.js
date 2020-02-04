@@ -4,13 +4,14 @@ import './App.css';
 import {TodoList} from "./TodoList";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import moment from "moment";
+import {Login} from "./components/LoginLogin"
+
 
 class App extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {items: [], text: '', priority: 0, dueDate: moment()};
+        this.state = {items: [], text: '', priority: 0, dueDate:""};
         this.handleTextChange = this.handleTextChange.bind(this);
         this.handlePriorityChange = this.handlePriorityChange.bind(this);
         this.handleDateChange = this.handleDateChange.bind(this);
@@ -27,6 +28,9 @@ class App extends Component {
                     <h1 className="App-title">TODO React App</h1>
                 </header>
 
+                <br/>
+                <br/>
+                <Login /> 
                 <br/>
                 <br/>
                 <form onSubmit={this.handleSubmit} className="todo-form">
