@@ -10,16 +10,61 @@ import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
 
 
 class App extends Component {
+    constructor(props) {
+        super(props);
+        //dwdwqdwqqwdqwd
+        localStorage.setItem("email","test@mail.com");
+        localStorage.setItem("password","admin");
+        if(! localStorage.getItem("isLoggedIn")){
+            localStorage.setItem("isLoggedIn",false);
+        }
+        this.loginF = this.loginF.bind(this);
+        
+    }
 
-    
+    loginF() {
+        console.log("entro a log de app")
+        /////dwwqdwqdwqdwqwqdwqwd
+        localStorage.setItem("isLoggedIn","true")
+    }
+
 
     render() {
         const LoginView = () => (
-            <Login/>
+            <Login loginF = { this.loginF }/>
         );
         const TodoAppView = () => (
             <TodoApp/>
         );
+
+
+        const logged = ( localStorage.getItem("isLoggedIn") === "true" );//dqwdwqdwqdqwdqwdqwd
+        let check ;
+        if(!(logged)) {
+            console.log("not logged");
+            check = (
+                <div>
+                    <ul >
+                        <li><Link to="/">Login</Link></li>
+                    </ul>
+                    <div>
+                        <Route exact path="/" component={LoginView}/>
+                    </div>
+                </div>
+            );
+        } else {
+            console.log(" is logged")            
+            check = (
+                <div>
+                    <ul >
+                        <li><Link to="/todo">Todo</Link></li>
+                    </ul>
+                    <div>
+                        <Route path="/todo" component={TodoAppView}/>
+                    </div>
+                </div>
+            );
+        }
     
 
         return (
@@ -29,18 +74,8 @@ class App extends Component {
                         <img src={logo} className="App-logo" alt="logo"/>
                         <h1 className="App-title">TODO React App</h1>
                     </header>
-
-                    <br/>
-                    <br/>
-
-                    <ul>
-                        <li><Link to="/">Login</Link></li>
-                        <li><Link to="/todo">Todo</Link></li>
-                    </ul>
-
                     <div>
-                        <Route exact path="/" component={LoginView}/>
-                        <Route path="/todo" component={TodoAppView}/>
+                    {check}
                     </div>
                 </div>
             </Router>

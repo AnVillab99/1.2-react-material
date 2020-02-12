@@ -62,19 +62,14 @@ export class TodoApp extends Component{
             <br/>
             <br/>
 
-            <TextField
-            id="date"
-            label="dueDate"
-            type="date"
-            name="dueDate"
-            className="dueDate"
-            selected={this.state.dueDate}
-            onChange={this.handleDateChange}
-            InputLabelProps={{
-            shrink: true,
-            }}
-            />
+            <DatePicker
+                id="dueDate"
+                name="dueDate"
+                selected={this.state.dueDate}
+                onChange={this.handleDateChange}
 
+            />
+            
             
             
             <br/>
@@ -106,13 +101,14 @@ export class TodoApp extends Component{
     }
 
     handleDateChange(date) {
+        console.log("changed date ")
+        console.log(date)
         this.setState({
             dueDate: date
         });
     }
 
-    handleSubmit(e) {
-        console.log("wdfefwef")
+    handleSubmit(e) { 
 
         e.preventDefault();
 
@@ -122,7 +118,7 @@ export class TodoApp extends Component{
         const newItem = {
             text: this.state.text,
             priority: this.state.priority,
-            dueDate: new Date(this.state.dueDate).toString('dddd, MMMM ,yyyy')
+            dueDate: new Date(this.state.dueDate).toString("yyyy, MMMM ,dddd")
 
         };
         console.log(this.state.dueDate)
