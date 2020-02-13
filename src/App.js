@@ -33,36 +33,6 @@ class App extends Component {
     render() {
         const LoginView = () => (<Login loginF = { this.loginF }/>);
         const TodoAppView = () => (<TodoApp/>);
-        const logged = ( localStorage.getItem("isLoggedIn") );//dqwdwqdwqdqwdqwdqwd
-        let check ;
-        if(!(logged)) {
-            console.log("not logged");
-            check = (
-                <div>
-                    <ul >
-                        <li><Link to="/">Login</Link></li>
-                    </ul>
-                    <div>
-                        <Route exact path="/" component={LoginView}/>
-                    </div>
-                </div>
-            );
-        } 
-        else {
-            console.log(" is logged")            
-            check = (
-                <div>
-                    <ul >
-                        <li><Link to="/todo">Todo</Link></li>
-                    </ul>
-                    <div>
-                        <Route exact path="/todo" component={TodoAppView}/>
-                    </div>
-                </div>
-            );
-        }
-    
-
         return (
             <Router>
                 <div className="App">
@@ -70,7 +40,10 @@ class App extends Component {
                         <img src={logo} className="App-logo" alt="logo"/>
                         <h1 className="App-title">TODO React App</h1>
                     </header>
-                    <div>{check}</div>
+                    <div>
+                    <Route component={!(this.state.isLoggedIn || localStorage.getItem("isLoggedIn"))? LoginView : TodoAppView}/>
+                    
+                    </div>
                 </div>
             </Router>
         );
