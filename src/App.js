@@ -12,7 +12,7 @@ import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
 class App extends Component {
     constructor(props) {
         super(props);
-        //dwdwqdwqqwdqwd
+        this.state = { isLoggedIn: false };
         localStorage.setItem("email","test@mail.com");
         localStorage.setItem("password","admin");
         if(! localStorage.getItem("isLoggedIn")){
@@ -24,21 +24,16 @@ class App extends Component {
 
     loginF() {
         console.log("entro a log de app")
-        /////dwwqdwqdwqdwqwqdwqwd
+        this.setState({isLoggedIn : true});
         localStorage.setItem("isLoggedIn","true")
+        
     }
 
 
     render() {
-        const LoginView = () => (
-            <Login loginF = { this.loginF }/>
-        );
-        const TodoAppView = () => (
-            <TodoApp/>
-        );
-
-
-        const logged = ( localStorage.getItem("isLoggedIn") === "true" );//dqwdwqdwqdqwdqwdqwd
+        const LoginView = () => (<Login loginF = { this.loginF }/>);
+        const TodoAppView = () => (<TodoApp/>);
+        const logged = ( localStorage.getItem("isLoggedIn") );//dqwdwqdwqdqwdqwdqwd
         let check ;
         if(!(logged)) {
             console.log("not logged");
@@ -52,7 +47,8 @@ class App extends Component {
                     </div>
                 </div>
             );
-        } else {
+        } 
+        else {
             console.log(" is logged")            
             check = (
                 <div>
@@ -60,7 +56,7 @@ class App extends Component {
                         <li><Link to="/todo">Todo</Link></li>
                     </ul>
                     <div>
-                        <Route path="/todo" component={TodoAppView}/>
+                        <Route exact path="/todo" component={TodoAppView}/>
                     </div>
                 </div>
             );
@@ -74,9 +70,7 @@ class App extends Component {
                         <img src={logo} className="App-logo" alt="logo"/>
                         <h1 className="App-title">TODO React App</h1>
                     </header>
-                    <div>
-                    {check}
-                    </div>
+                    <div>{check}</div>
                 </div>
             </Router>
         );
